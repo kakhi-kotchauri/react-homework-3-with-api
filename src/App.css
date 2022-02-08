@@ -1,38 +1,172 @@
-.App {
-  text-align: center;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&display=swap');
+
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+* {
+	box-sizing: border-box;
+	font-family: Poppins;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////// */
+
+.todo-par {
+	display: flex;
+	justify-content: center;
+	margin-top: 2vw;
+	margin-bottom: 2vw;
 }
 
-.App-link {
-  color: #61dafb;
+.todo-text {
+	display: inline-block;
+	font-size: 1.3vw;
+	margin-left: 0.5vw;
+	margin-right: 0.5vw;
+	vertical-align: middle;
+	font-family: Poppins;
+	color: rgba(73, 77, 77, 0.925);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.checked {
+	text-decoration: line-through red 0.2vw;
+}
+
+.h2-title {
+	text-align: center;
+	font-size: 1.5vw;
+	margin-bottom: 1.5vw;
+	color: rgba(73, 77, 77, 0.925);
+	font-family: Poppins;
+}
+
+.addbutton {
+	border-radius: 0.4vw;
+	width: 3vw;
+	height: 2.5vw;
+	border-color: aqua;
+	background-color: rgb(179, 232, 245);
+    margin-left: 1vw;
+	font-size: 1.1vw;
+	text-align: center;
+	vertical-align: middle;
+	color: rgba(73, 77, 77, 0.925);
+}
+
+.removebutton {
+	font-size: 1.1vw;
+	height: 2vw;
+	border-radius: 0.3vw;
+	vertical-align: middle;
+	border-color: aqua;
+	background-color: rgb(179, 232, 245);
+	color: rgba(73, 77, 77, 0.925);
+}
+
+.removeeverithing {
+	margin-top: 0.3vw;
+	margin-bottom: 0.3vw;
+	font-size: 1.1vw;
+	height: 2vw;
+	border-radius: 0.3vw;
+	border-color: aqua;
+	background-color: rgb(179, 232, 245);
+	color: rgba(73, 77, 77, 0.925);
+}
+
+
+.checkbox {
+	width: 1vw;
+	height: 1vw;
+	vertical-align: middle;
+}
+
+.input-text {
+	width: 80%;
+	height: 2vw;
+	border-radius: 0.4vw;
+	border-color: aqua;
+	background-color: rgba(179, 232, 245, 0.822);
+	font-size: 1.2vw;
+	vertical-align: middle;
+}
+
+.input-text:focus {
+	outline: solid 0.15vw rgba(28, 240, 159, 0.89);
+	border: solid 0.05vw rgba(48, 245, 107, 0.788);
+}
+
+.form {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.par {
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: rgb(93, 211, 191);
+	padding: 1vw 1vw 1vw 1vw;
+	border-radius: 0.4vw;
+}
+
+
+.ul {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.li {
+	margin-top: 0.3vw;
+	margin-bottom: 0.3vw;
 }
