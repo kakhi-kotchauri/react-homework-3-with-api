@@ -1,17 +1,24 @@
 import { useState, useRef, useEffect } from "react"
+import axios from "axios"
 
-const todoitems = [
-    {id: 1, text: 'sometext 1', completed: false},
-    {id: 2, text: 'sometext 2', completed: true},
-    {id: 3, text: 'sometext 3', completed: false},
-]
 
 
 export function Todo() {
 
-    const [newtodo, setnewtodo] = useState(todoitems)
+
+    const [newtodo, setnewtodo] = useState([])
     const [value, setvalue] = useState('')
     const inputref = useRef()
+
+
+    useEffect(() => {
+    
+        axios.get('https://us-central1-js04-b4877.cloudfunctions.net/tasks')
+        .then(response => setnewtodo(response.data.data.sort(function (a, b) {return b.create_time - a.create_time})))
+        .catch(err => console.log(err))
+
+    }, [])
+
 
     useEffect(() => {
       inputref.current.focus()
@@ -26,31 +33,55 @@ export function Todo() {
             completed: false
           }
   
-          setnewtodo([...newtodo, newobj])
+         axios.post('https://us-central1-js04-b4877.cloudfunctions.net/tasks/create', {
+             text : value
+         })
+         .then(response => console.log(response))
+         .catch(err => console.log(err))
+
+          setnewtodo([newobj, ...newtodo])
           setvalue('')
       }
     }
 
+
+
     function changeitem(id) {
-        let itemchange = newtodo.map(item => {
-            if(item.id === id) {
-                item.completed = !item.completed
-                return(item)
-            } else {
-                return(item)
-            }
-        })
-        setnewtodo(itemchange)
+   
+        const find = newtodo.find(item => item.id === id)
+        const replace = newtodo.filter(item => item.id !== id)
+
+        if(find.completed === false) {
+
+        console.log('check')
+        find.completed = true
+        axios.post(`https://us-central1-js04-b4877.cloudfunctions.net/tasks/check/${id}`)
+        setnewtodo([...replace, find].sort(function (a, b) {return b.create_time - a.create_time}))
+
+        } else {
+
+        console.log('uncheck')
+        find.completed = false
+        axios.post(`https://us-central1-js04-b4877.cloudfunctions.net/tasks/uncheck/${id}`)
+        setnewtodo([...replace, find].sort(function (a, b) {return b.create_time - a.create_time}))
+
+        }
+         
     }
+
 
     function remove(id) {
-        let itemremove = newtodo.filter(item => item.id !== id)
-        setnewtodo(itemremove)
+        axios.delete(`https://us-central1-js04-b4877.cloudfunctions.net/tasks/${id}`)
+        .then(response => {
+            if(response.status === 200) {    
+                let itemremove = newtodo.filter(item => item.id !== id)
+                setnewtodo(itemremove.sort(function (a, b) {return b.create_time - a.create_time}))
+            }
+        })
+        .catch(err => console.log(err))
+
     }
 
-    function removeverithing(id) {
-        setnewtodo([])
-    }
 
     return (
         <div className="todo-par">
@@ -69,7 +100,9 @@ export function Todo() {
             </form>
 
             <ul className="ul">
-                {newtodo.map(item => {
+                {
+                newtodo.length >= 1 ?    
+                newtodo.map(item => {
                     return(
                     <li className="li" key={item.id}>
                         
@@ -83,11 +116,11 @@ export function Todo() {
                        <button className="removebutton" onClick={() => remove(item.id)}>remove</button>
                     </li>
                     )
-                })}
-                {
-                    newtodo.length >= 2 ? 
-                    <button className="removeeverithing" onClick={removeverithing}>Remove everithing</button> : false
+                }) 
+                : null
+                
                 }
+               
             </ul>
 
             </div>
